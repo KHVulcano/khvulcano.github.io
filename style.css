@@ -1,0 +1,198 @@
+:root {
+    --color-main: #E91CDF;
+    --color-second: #761CE9;
+    --color-main-light: #e882e3;
+    --color-second-light: #ae82e8;
+    --background-color-main: #1E1531;
+    --background-color-second: #0B0811;
+}
+
+/**
+BLUE
+:root {
+    --color-main: #1d1dbe;
+    --color-second: #000091;
+    --color-main-light: #5f5fe7;
+    --color-second-light: #0000d6;
+    --background-color-main: #00001d;
+    --background-color-second: #00000f;
+}
+
+PURPLE
+:root {
+    --color-main: #E91CDF;
+    --color-second: #761CE9;
+    --color-main-light: #e882e3;
+    --color-second-light: #ae82e8;
+    --background-color-main: #1E1531;
+    --background-color-second: #0B0811;
+}
+*/
+
+div#hero {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    
+    background: linear-gradient(180deg, var(--background-color-main) 16.67%, var(--background-color-second) 100%);
+    box-shadow: 0px 43px 62px rgba(0, 0, 0, 0.25);
+    
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: 10px;
+}
+
+div#content-frame {
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    left: 30vw; 
+    top: 35vh;
+    margin-left: auto; 
+    margin-right: auto; 
+    width: fit-content;
+    height: fit-content;
+}
+
+div.title {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+
+    width: 750px;
+    height: 192px;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    
+    margin-left: auto; 
+    margin-right: auto; 
+}
+
+h2 {
+    font-family: 'Kufam', sans-serif;
+    font-style: normal;
+    font-weight: 200;
+    font-size: 64px;
+    line-height: 192px;
+
+    margin: 0%;
+    /* Primary */
+    
+    color: white;
+}
+
+.title {
+    font-family: 'Kufam', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 148px;
+    line-height: 192px;
+
+    margin: 0%;
+}
+
+.title#v {
+    /* Primary */
+    
+    color: var(--color-main);
+    
+    
+    /* Inside auto layout */
+    
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.title#ulcano {
+    /* White */
+    
+    color: #FFFFFF;
+    
+    
+    /* Inside auto layout */
+    
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+div.buttons {
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    margin-left: 12.5%;
+
+    /* Inside auto layout */
+ 
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 36px;
+}
+
+button.body {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 42px;
+    width: 187px;
+    height: 55px;
+    
+    
+    font-family: 'Kufam';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    
+    /* White */
+    
+    color: #FFFFFF;
+
+}
+
+button#projects {
+    /* Gradient */
+
+    background: linear-gradient(94.52deg, var(--color-main) 0%, var(--color-second) 100%);
+    border-radius: 4px;
+}
+
+button#projects:hover {
+    background: linear-gradient(94.52deg, var(--color-main-light) 0%, var(--color-second-light) 100%);
+}
+
+button#about {
+    /* White */
+
+    border: 2px solid #FFFFFF;
+    border-radius: 4px;
+    background-color: transparent;
+}
+
+button#about:hover {
+    background-color: white;
+    color: #0B0811;
+}
