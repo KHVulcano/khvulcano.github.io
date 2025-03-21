@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Michael Palazzo | Developer & Hardware Specialist</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #6c757d;
+            --dark-color: #212529;
+            --light-color: #f8f9fa;
+            --accent-color: #ff5500;
+        }
+        
+        body {
+            padding-top: 56px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+        
+        /* Animation keyframes */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Enhanced Navbar */
+        .navbar {
+            transition: all 0.3s ease;
+            padding: 0.7rem 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand:hover {
+            color: var(--accent-color) !important;
+        }
+        
+        .navbar-shrink {
+            padding: 0.5rem 1rem;
+            background-color: rgba(33, 37, 41, 0.95) !important;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-link {
+            position: relative;
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            margin: 0 0.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--accent-color);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 80%;
+            left: 10%;
+        }
+        
+        .nav-link.active::after {
+            width: 80%;
+            left: 10%;
+        }
+        
+        .nav-link:hover {
+            color: var(--accent-color) !important;
+        }
+        
+        .nav-link.active {
+            color: var(--accent-color) !important;
+        }
+        
+        .navbar-toggler {
+            border: none;
+            padding: 0.25rem 0.75rem;
+            font-size: 1.2rem;
+        }
+        
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+        
+        /* Navbar progress indicator */
+        .scroll-progress-container {
+            position: fixed;
+            top: 56px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: transparent;
+            z-index: 1000;
+        }
+        
+        .scroll-progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+        
+        .header-section {
+            background: linear-gradient(135deg, #343a40 0%, #121416 100%);
+            color: white;
+            padding: 100px 0 70px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: linear-gradient(to right bottom, transparent 49%, var(--light-color) 50%);
+        }
+        
+        .header-section .profile-img {
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.2);
+            max-width: 200px;
+            animation: pulse 3s infinite ease-in-out;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+        
+        .header-section .profile-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .social-icons a:hover {
+            color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+        
+        section {
+            padding: 80px 0;
+            position: relative;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+            animation: slideInLeft 0.5s ease-out both;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+        
+        .section-title:hover::after {
+            width: 100px;
+        }
+        
+        .project-card {
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            height: 100%;
+            border: none;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .project-img {
+            height: 200px;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .project-card:hover .project-img {
+            transform: scale(1.1);
+        }
+        
+        .skills-category {
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .skills-category:hover {
+            background-color: rgba(0, 0, 0, 0.02);
+            transform: translateX(5px);
+            box-shadow: -5px 0 0 var(--accent-color);
+        }
+        
+        .skills-section .badge {
+            margin: 3px;
+            padding: 8px 15px;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+        
+        .skills-section .badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background-color: var(--secondary-color);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -40px;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-item:hover::before {
+            background-color: var(--accent-color);
+            box-shadow: 0 0 0 3px var(--accent-color);
+            transform: scale(1.2);
+        }
+        
+        .contact-info i {
+            width: 30px;
+            color: var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-info a:hover i {
+            transform: scale(1.2);
+        }
+        
+        .contact-form .form-control {
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-form .form-control:focus {
+            box-shadow: none;
+            border-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        .btn-primary {
+            padding: 10px 25px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 1px;
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.6s ease;
+            z-index: -1;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 85, 0, 0.3);
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            padding: 30px 0;
+        }
+        
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+        
+        /* Floating navigation indicator */
+        .nav-indicator {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            z-index: 999;
+        }
+        
+        .nav-indicator a {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-indicator a.active {
+            background-color: var(--accent-color);
+            transform: scale(1.5);
+        }
+        
+        .nav-tooltip {
+            position: absolute;
+            right: 25px;
+            background-color: var(--dark-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .nav-indicator a:hover .nav-tooltip {
+            opacity: 1;
+            visibility: visible;
+            right: 20px;
+        }
+        
+        /* Custom cursor for links and buttons */
+        a, button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <i class="bi bi-code-slash"></i> Michael Palazzo
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link active" href="#about"><i class="bi bi-person"></i> About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#experience"><i class="bi bi-briefcase"></i> Experience</a></li>
+                <li class="nav-item"><a class="nav-link" href="#skills"><i class="bi bi-tools"></i> Skills</a></li>
+                <!-- <li class="nav-item"><a class="nav-link" href="#projects"><i class="bi bi-laptop"></i> Projects</a></li> -->
+                <li class="nav-item"><a class="nav-link" href="#contact"><i class="bi bi-envelope"></i> Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Scroll Progress Bar -->
+<div class="scroll-progress-container">
+    <div class="scroll-progress-bar" id="scrollProgress"></div>
+</div>
+
+<!-- Floating Navigation Indicator -->
+<div class="nav-indicator d-none d-lg-flex">
+    <a href="#about" class="active">
+        <span class="nav-tooltip">About</span>
+    </a>
+    <a href="#experience">
+        <span class="nav-tooltip">Experience</span>
+    </a>
+    <a href="#skills">
+        <span class="nav-tooltip">Skills</span>
+    </a>
+    <!--
+    <a href="#projects">
+        <span class="nav-tooltip">Projects</span>
+    </a>
+    -->
+    <a href="#contact">
+        <span class="nav-tooltip">Contact</span>
+    </a>
+</div>
+
+<!-- Back to Top Button -->
+<a href="#" class="back-to-top" id="backToTop">
+    <i class="bi bi-arrow-up"></i>
+</a>
+
+<!-- Header -->
+<header class="header-section text-center">
+    <div class="container">
+        <img src="icon.png" alt="Michael Palazzo" class="profile-img mb-4">
+        <h1 class="display-4 fw-bold">Michael Palazzo</h1>
+        <p class="lead fs-3 mb-4">Developer & Hardware Specialist</p>
+        <p class="mb-4 w-75 mx-auto">Bridging the gap between software development and hardware expertise</p>
+        <div class="social-icons">
+            <a href="https://github.com/KHVulcano" target="_blank"><i class="bi bi-github"></i></a>
+            <a href="https://www.linkedin.com/in/michael-palazzo-a74438322" target="_blank"><i class="bi bi-linkedin"></i></a>
+            <a href="#"><i class="bi bi-twitter"></i></a>
+            <a href="#"><i class="bi bi-envelope-fill"></i></a>
+        </div>
+    </div>
+</header>
+
+<!-- About Section -->
+<section id="about" class="bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <h2 class="section-title">About Me</h2>
+                <p class="mb-4">I'm a passionate developer with extensive experience in Java and scripting languages, coupled with deep practical knowledge of hardware development, PC building, modding, and troubleshooting. I've also developed strong 3D modeling and visualization skills across multiple industry-standard tools.</p>
+                
+                <p class="mb-4">After developing my skills independently and serving as the unofficial IT specialist among my network, I'm now transitioning into the professional IT industry. My unique blend of software development skills, 3D design capabilities, and hardware expertise positions me to solve complex technical challenges from multiple perspectives.</p>
+                
+                <p>I thrive in environments where I can apply my programming knowledge, 3D modeling expertise, and hardware skills to create efficient, optimized solutions. My goal is to join a forward-thinking tech company where I can continue growing while contributing my diverse skillset to meaningful projects.</p>
+            </div>
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Professional Overview</h3>
+                        
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0">
+                                <i class="bi bi-code-square fs-2 text-primary"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h4 class="h5">Software Development</h4>
+                                <p>Proficient in Java and various scripting languages with a focus on creating efficient, maintainable code</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0">
+                                <i class="bi bi-cpu fs-2 text-primary"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h4 class="h5">Hardware Expertise</h4>
+                                <p>Extensive hands-on experience with PC building, component selection, optimization, and troubleshooting</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex">
+                            <div class="flex-shrink-0">
+                                <i class="bi bi-tools fs-2 text-primary"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h4 class="h5">System Integration</h4>
+                                <p>Skilled at bridging software and hardware components to create cohesive, optimized systems</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Experience Section -->
+<section id="experience">
+    <div class="container">
+        <h2 class="section-title">Experience</h2>
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <h4>Game On, Cook</h4>
+                <p class="text-muted">June 2024 - February 2025</p>
+                <p>Managed food preparation while simultaneously troubleshooting and resolving IT issues for staff and management. Created custom scripts to streamline restaurant operations and inventory management.</p>
+            </div>
+            
+            <div class="timeline-item">
+                <h4>Arby's, Team Member</h4>
+                <p class="text-muted">January 2024 - August 2024</p>
+                <p>Optimized kitchen workflow through application of programming principles. Served as unofficial IT support for POS systems and restaurant technology infrastructure.</p>
+            </div>
+            
+            <div class="timeline-item">
+                <h4>Steak and Shake, Team Member</h4>
+                <p class="text-muted">February 2022 - August 2023</p>
+                <p>Developed problem-solving skills in a fast-paced environment. Applied logical thinking to improve operational efficiency, reflecting the same structured approach used in programming.</p>
+            </div>
+            
+            <div class="timeline-item">
+                <h4>Freelance IT Support</h4>
+                <p class="text-muted">2020 - Present</p>
+                <p>Acted as an unofficial IT specialist among friends, family, and community, handling troubleshooting, hardware upgrades, system optimization, and custom PC builds. Developed diagnostic tools using Java to identify and resolve common hardware issues.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Skills Section -->
+<section id="skills" class="skills-section bg-light">
+    <div class="container">
+        <h2 class="section-title">Skills</h2>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="skills-category">
+                    <h4 class="mb-3"><i class="bi bi-code-slash me-2"></i>Programming</h4>
+                    <span class="badge bg-primary">Java</span>
+                    <span class="badge bg-primary">Python</span>
+                    <span class="badge bg-primary">JavaScript</span>
+                    <span class="badge bg-primary">Bash</span>
+                    <span class="badge bg-primary">PowerShell</span>
+                    <span class="badge bg-primary">SQL</span>
+                </div>
+                
+                <div class="skills-category">
+                    <h4 class="mb-3"><i class="bi bi-cpu me-2"></i>Hardware</h4>
+                    <span class="badge bg-success">PC Building</span>
+                    <span class="badge bg-success">Hardware Modding</span>
+                    <span class="badge bg-success">Component Selection</span>
+                    <span class="badge bg-success">Overclocking</span>
+                    <span class="badge bg-success">Cooling Solutions</span>
+                    <span class="badge bg-success">Power Management</span>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="skills-category">
+                    <h4 class="mb-3"><i class="bi bi-tools me-2"></i>Troubleshooting</h4>
+                    <span class="badge bg-info text-dark">System Diagnostics</span>
+                    <span class="badge bg-info text-dark">Performance Optimization</span>
+                    <span class="badge bg-info text-dark">BIOS Configuration</span>
+                    <span class="badge bg-info text-dark">Driver Management</span>
+                    <span class="badge bg-info text-dark">OS Troubleshooting</span>
+                </div>
+                
+                <div class="skills-category">
+                    <h4 class="mb-3"><i class="bi bi-gear me-2"></i>Other Skills</h4>
+                    <span class="badge bg-danger">Low-Level Development</span>
+                    <span class="badge bg-danger">Version Control (Git)</span>
+                    <span class="badge bg-danger">Technical Documentation</span>
+                    <span class="badge bg-danger">Project Management</span>
+                    <span class="badge bg-danger">Customer Support</span>
+                    <span class="badge bg-danger">Network Basics</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Projects Section
+<section id="projects">
+    <div class="container">
+        <h2 class="section-title">Projects</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card project-card shadow-sm">
+                    <img src="icon.png" class="card-img-top project-img" alt="3D Character Model">
+                    <div class="card-body">
+                        <h5 class="card-title">Sci-Fi Character Design</h5>
+                        <p class="card-text">Detailed 3D character model created in Blender with realistic texturing in Substance Painter. Features optimized topology for game-ready performance with 12k polygons.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="badge bg-secondary">Blender</span>
+                                <span class="badge bg-secondary">Substance</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-primary">Gallery</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card project-card shadow-sm">
+                    <img src="icon.png" class="card-img-top project-img" alt="Custom PC Build">
+                    <div class="card-body">
+                        <h5 class="card-title">High-Performance Gaming Rig</h5>
+                        <p class="card-text">Custom-built gaming PC featuring overclocked Ryzen CPU, water cooling system, and custom cable management. Achieved 30% performance improvement over stock configurations.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="badge bg-secondary">Hardware</span>
+                                <span class="badge bg-secondary">Overclocking</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-primary">Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card project-card shadow-sm">
+                    <img src="icon.png" class="card-img-top project-img" alt="Modified Laptop">
+                    <div class="card-body">
+                        <h5 class="card-title">Laptop Performance Mod</h5>
+                        <p class="card-text">Modified a standard business laptop with upgraded RAM, SSD, and enhanced cooling solution. Created custom thermal paste application technique that reduced temperatures by 15°C under load.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="badge bg-secondary">Hardware Mod</span>
+                                <span class="badge bg-secondary">Thermal Solution</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-primary">Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card project-card shadow-sm">
+                    <img src="icon.png" class="card-img-top project-img" alt="Java Application">
+                    <div class="card-body">
+                        <h5 class="card-title">PC Diagnostic Tool</h5>
+                        <p class="card-text">Java-based application for system diagnostics and performance monitoring. Features automated troubleshooting, component stress testing, and detailed reporting of hardware performance metrics.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="badge bg-secondary">Java</span>
+                                <span class="badge bg-secondary">Diagnostics</span>
+                            </div>
+                            <a href="https://github.com/KHVulcano" class="btn btn-sm btn-outline-primary" target="_blank">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mt-4">
+                <div class="card project-card shadow-sm">
+                    <img src="icon.png" class="card-img-top project-img" alt="Custom Script">
+                    <div class="card-body">
+                        <h5 class="card-title">System Backup Automation</h5>
+                        <p class="card-text">Developed a custom backup script solution using PowerShell and Python to automate incremental backups for critical data. Includes notification system and verification of backup integrity.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="badge bg-secondary">Python</span>
+                                <span class="badge bg-secondary">PowerShell</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-primary">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mt-4">
+                <div class="card project-card shadow-sm">
+                    <img src="icon.png" class="card-img-top project-img" alt="Custom Case Mod">
+                    <div class="card-body">
+                        <h5 class="card-title">Custom PC Case Mod</h5>
+                        <p class="card-text">Transformed a standard PC case with custom lighting, improved airflow design, and unique aesthetic modifications. Included custom fan controller system programmed with Arduino.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="badge bg-secondary">Hardware Mod</span>
+                                <span class="badge bg-secondary">Arduino</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-primary">Gallery</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mt-4">
+                <div class="card project-card shadow-sm">
+                    <img src="icon.png" class="card-img-top project-img" alt="Java Project">
+                    <div class="card-body">
+                        <h5 class="card-title">Inventory Management System</h5>
+                        <p class="card-text">Java-based application with SQL database backend for tracking PC components and build materials. Features barcode scanning integration and automatic restock notifications.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="badge bg-secondary">Java</span>
+                                <span class="badge bg-secondary">SQL</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-primary">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+-->
+
+<!-- Contact Section -->
+<section id="contact" class="bg-light">
+    <div class="container">
+        <h2 class="section-title">Contact</h2>
+        <div class="row">
+            <div class="col-lg-5 mb-4 mb-lg-0">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Get In Touch</h3>
+                        <p>I'm currently looking for new opportunities in the IT industry. Whether you have a question or just want to say hi, I'll try my best to get back to you!</p>
+                        
+                        <ul class="list-unstyled contact-info">
+                            <li class="mb-3 d-flex align-items-center">
+                                <i class="bi bi-envelope me-2"></i>
+                                <a href="mailto:michael.palazzo@example.com">michael.palazzo@example.com</a>
+                            </li>
+                            <!--
+                            <li class="mb-3 d-flex align-items-center">
+                                <i class="bi bi-telephone me-2"></i>
+                                <a href="tel:+1234567890">(123) 456-7890</a>
+                            </li>
+                            -->
+                            <li class="mb-3 d-flex align-items-center">
+                                <i class="bi bi-geo-alt me-2"></i>
+                                <span>Parma, Ohio</span>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <i class="bi bi-linkedin me-2"></i>
+                                <a href="https://www.linkedin.com/in/michael-palazzo-a74438322" target="_blank">LinkedIn Profile</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-7">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <form class="contact-form">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <input type="text" class="form-control" placeholder="Your Name" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <input type="email" class="form-control" placeholder="Your Email" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Subject" required>
+                            </div>
+                            <div class="mb-3">
+                                <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="text-white text-center">
+    <div class="container">
+        <div class="mb-4">
+            <a href="https://github.com/KHVulcano" class="text-white mx-2" target="_blank"><i class="bi bi-github"></i></a>
+            <a href="https://www.linkedin.com/in/michael-palazzo-a74438322" class="text-white mx-2" target="_blank"><i class="bi bi-linkedin"></i></a>
+            <a href="#" class="text-white mx-2"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="text-white mx-2"><i class="bi bi-envelope-fill"></i></a>
+        </div>
+        <p>&copy; 2025 Michael Palazzo. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Navbar active state change
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+        const indicatorLinks = document.querySelectorAll('.nav-indicator a');
+        const scrollProgress = document.getElementById('scrollProgress');
+        const backToTopBtn = document.getElementById('backToTop');
+        const navbar = document.getElementById('mainNav');
+        
+        // Elements for animation on scroll
+        const animateElements = document.querySelectorAll('.project-card, .timeline-item, .skills-category');
+        
+        // Add animate-on-scroll class to elements
+        animateElements.forEach(el => {
+            el.classList.add('animate-on-scroll');
+        });
+        
+        // Function to handle scroll events
+        function handleScroll() {
+            // Calculate scroll progress
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            scrollProgress.style.width = scrollPercent + '%';
+            
+            // Show/hide back to top button
+            if (scrollTop > 300) {
+                backToTopBtn.classList.add('visible');
+                navbar.classList.add('navbar-shrink');
+            } else {
+                backToTopBtn.classList.remove('visible');
+                navbar.classList.remove('navbar-shrink');
+            }
+            
+            // Update active state based on scroll
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (scrollTop >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            // Update navbar active state
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Update indicator active state
+            indicatorLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Animate elements when they come into view
+            animateElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                const isVisible = (rect.top <= window.innerHeight * 0.8);
+                
+                if (isVisible) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+        
+        // Initial call to set state
+        handleScroll();
+        
+        // Add scroll event listener
+        window.addEventListener('scroll', handleScroll);
+        
+        // Smooth scroll for navbar links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 60,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add animation to section titles on page load
+        document.querySelectorAll('.section-title').forEach((title, index) => {
+            title.style.animationDelay = (index * 0.1) + 's';
+        });
+        
+        // Typing effect for the header
+        const headerTitle = document.querySelector('.header-section .display-4');
+        const headerSubtitle = document.querySelector('.header-section .lead');
+        
+        if (headerTitle && headerSubtitle) {
+            headerTitle.style.animation = 'fadeInUp 1s ease-out both';
+            headerSubtitle.style.animation = 'fadeInUp 1s ease-out 0.3s both';
+        }
+        
+        // Project cards staggered animation
+        document.querySelectorAll('.project-card').forEach((card, index) => {
+            card.style.animationDelay = (index * 0.1) + 's';
+        });
+        
+        // Form submission animation
+        const contactForm = document.querySelector('.contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const submitBtn = this.querySelector('button[type="submit"]');
+                submitBtn.innerHTML = '<i class="bi bi-check-circle"></i> Message Sent!';
+                submitBtn.classList.add('success');
+                
+                setTimeout(() => {
+                    this.reset();
+                    submitBtn.innerHTML = 'Send Message';
+                    submitBtn.classList.remove('success');
+                }, 3000);
+            });
+        }
+    });
+</script>
+</body>
+</html>
